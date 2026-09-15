@@ -24,9 +24,10 @@ fn main() {
     });
 
     let answer = match (day, part) {
-        (1, "a") => days::day01::part_a(&input),
-        (1, "b") => days::day01::part_b(&input),
-        (2, "a") => days::day02::part_a(&input) as i32,
+        (1, "a") => days::day01::part_a(&input) as u64,
+        (1, "b") => days::day01::part_b(&input) as u64,
+        (2, "a") => days::day02::part_a(&input),
+        (2, "b") => days::day02::part_b(&input),
         _ => usage("that day and part has not been implemented yet"),
     };
     println!("{answer}");

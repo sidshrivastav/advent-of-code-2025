@@ -14,6 +14,7 @@ Run a day and part with Cargo. The default input is loaded from `inputs/dayXX.tx
 cargo run -- 1a
 cargo run -- 1b
 cargo run -- 2a
+cargo run -- 2b
 ```
 
 You can also use the `day` prefix or provide a custom input path:
@@ -30,7 +31,7 @@ Day 01 reads rotations, one per line, such as `R48` or `L2`. Day 02 reads comma-
 | Day | Part A | Part B |
 | --- | :----: | :----: |
 | 01  | ✅ | ✅ |
-| 02  | ✅ | — |
+| 02  | ✅ | ✅ |
 
 Solutions live in `src/days/dayXX.rs` and are registered in `src/days/mod.rs`.
 Add each day’s default input as `inputs/dayXX.txt`.
