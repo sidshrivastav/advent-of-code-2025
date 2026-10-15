@@ -28,6 +28,8 @@ fn main() {
         (1, "b") => days::day01::part_b(&input) as u64,
         (2, "a") => days::day02::part_a(&input),
         (2, "b") => days::day02::part_b(&input),
+        (3, "a") => days::day03::part_a(&input),
+        (3, "b") => days::day03::part_b(&input),
         _ => usage("that day and part has not been implemented yet"),
     };
     println!("{answer}");
