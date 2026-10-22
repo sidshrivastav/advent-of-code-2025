@@ -31,7 +31,7 @@ fn main() {
         (3, "a") => days::day03::part_a(&input),
         (3, "b") => days::day03::part_b(&input),
         (4, "a") => days::day04::part_a(&input),
-        // (3, "b") => days::day03::part_b(&input),
+        (4, "b") => days::day04::part_b(&input),
         _ => usage("that day and part has not been implemented yet"),
     };
     println!("{answer}");

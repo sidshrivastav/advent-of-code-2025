@@ -1,13 +1,9 @@
-fn number_of_forklift(input: &str) -> u64 {
-    let grid: Vec<Vec<char>> = input
-            .lines()                         
-            .map(|line| line.trim())
-            .filter(|line| !line.is_empty())
-            .map(|line| line.chars().collect())
-            .collect();  
+fn number_of_forklift(grid: &Vec<Vec<char>>) -> (u64, Vec<Vec<char>>) {
+
+    let mut new_grid = grid.clone();
     
     if grid.is_empty() || grid[0].is_empty() {
-        return 0;
+        return (0, new_grid);
     }
 
     let row = grid.len();
@@ -40,25 +36,53 @@ fn number_of_forklift(input: &str) -> u64 {
                 }
                 if count < 4 {
                     result += 1;
+                    new_grid[r][c] = '.';
                 }
             }
         }
     }
-    result
+    (result, new_grid)
 }
 
 pub fn part_a(input: &str) -> u64 {
-    number_of_forklift(input)
+    let grid: Vec<Vec<char>> = input
+        .lines()
+        .map(|line| line.trim())
+        .filter(|line| !line.is_empty())
+        .map(|line| line.chars().collect())
+        .collect();
+    let (count, _) = number_of_forklift(&grid);
+    count
 }
 
-// pub fn part_b(input: &str) -> u64 {
-//     max_digits(input, 12)
-// }
+pub fn part_b(input: &str) -> u64 {
+    let mut grid: Vec<Vec<char>> = input
+        .lines()
+        .map(|line| line.trim())
+        .filter(|line| !line.is_empty())
+        .map(|line| line.chars().collect())
+        .collect();
+
+    let mut result: u64 = 0;
+
+    loop {
+        let (count, new_grid) = number_of_forklift(&grid);
+
+        if count == 0 {
+            break;
+        }
+
+        result += count;
+        grid = new_grid;
+    }
+
+    result
+}
 
 
 #[cfg(test)]
 mod tests {
-    use super::{part_a};
+    use super::{part_a, part_b};
 
     const SAMPLE: &str = r#"
         ..@@.@@@@.
@@ -78,8 +102,8 @@ mod tests {
         assert_eq!(part_a(SAMPLE), 13);
     }
 
-    // #[test]
-    // fn solves_part_b_sample() {
-    //     assert_eq!(part_b(SAMPLE), 3_121_910_778_619);
-    // }
+    #[test]
+    fn solves_part_b_sample() {
+        assert_eq!(part_b(SAMPLE), 43);
+    }
 }
