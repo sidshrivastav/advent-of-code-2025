@@ -28,9 +28,18 @@ cargo run -- 1a path/to/input.txt
 | 01  | ✅ | ✅ |
 | 02  | ✅ | ✅ |
 | 03  | ✅ | ✅ |
+| 04  | ✅ | — |
 
 Solutions live in `src/days/dayXX.rs` and are registered in `src/days/mod.rs`.
 Add each day’s default input as `inputs/dayXX.txt`.
+
+Run the Day 04 tests with:
+
+```sh
+cargo test day04
+```
+
+Day 04 Part A counts forklift-accessible rolls of paper in the grid. Part B has not been implemented yet.
 
 ## Development
 
