@@ -6,10 +6,7 @@ fn max_digits(input: &str, digit_count: usize) -> u64 {
         .lines()
         .filter(|line| !line.trim().is_empty())
         .map(|line| {
-            let numbers: Vec<u32> = line
-                .chars()
-                .filter_map(|c| c.to_digit(10))
-                .collect();
+            let numbers: Vec<u32> = line.chars().filter_map(|c| c.to_digit(10)).collect();
 
             let mut result = 0u64;
             let mut start = 0;
@@ -38,7 +35,6 @@ pub fn part_a(input: &str) -> u64 {
 pub fn part_b(input: &str) -> u64 {
     max_digits(input, 12)
 }
-
 
 #[cfg(test)]
 mod tests {

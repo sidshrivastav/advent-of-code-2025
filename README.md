@@ -29,6 +29,7 @@ cargo run -- 1a path/to/input.txt
 | 02  | ✅ | ✅ |
 | 03  | ✅ | ✅ |
 | 04  | ✅ | ✅ |
+| 05  | ✅ | ⏳ |
 
 Solutions live in `src/days/dayXX.rs` and are registered in `src/days/mod.rs`.
 Add each day’s default input as `inputs/dayXX.txt`.
@@ -40,6 +41,8 @@ cargo test day04
 ```
 
 Day 04 counts rolls of paper that can be removed by a forklift from the grid. Part B repeats the removal process until no more rolls are accessible.
+
+Day 05 counts ingredient IDs that fall within the merged fresh ranges. Part B is not implemented yet.
 
 ## Development
 

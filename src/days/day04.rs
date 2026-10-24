@@ -1,7 +1,6 @@
 fn number_of_forklift(grid: &Vec<Vec<char>>) -> (u64, Vec<Vec<char>>) {
-
     let mut new_grid = grid.clone();
-    
+
     if grid.is_empty() || grid[0].is_empty() {
         return (0, new_grid);
     }
@@ -16,7 +15,7 @@ fn number_of_forklift(grid: &Vec<Vec<char>>) -> (u64, Vec<Vec<char>>) {
         [1, 1],
         [-1, -1],
         [1, -1],
-        [-1, 1]
+        [-1, 1],
     ];
 
     let mut result = 0;
@@ -27,7 +26,7 @@ fn number_of_forklift(grid: &Vec<Vec<char>>) -> (u64, Vec<Vec<char>>) {
                 for [dr, dc] in directions {
                     let nr = r as i32 + dr;
                     let nc = c as i32 + dc;
-                    
+
                     if nr >= 0 && nr < row as i32 && nc >= 0 && nc < col as i32 {
                         if grid[nr as usize][nc as usize] == '@' {
                             count += 1;
@@ -78,7 +77,6 @@ pub fn part_b(input: &str) -> u64 {
 
     result
 }
-
 
 #[cfg(test)]
 mod tests {
