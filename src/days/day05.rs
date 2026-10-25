@@ -62,35 +62,35 @@ pub fn part_a(input: &str) -> u64 {
     result
 }
 
-// pub fn part_b(input: &str) -> u64 {
-//     let mut grid: Vec<Vec<char>> = input
-//         .lines()
-//         .map(|line| line.trim())
-//         .filter(|line| !line.is_empty())
-//         .map(|line| line.chars().collect())
-//         .collect();
+pub fn part_b(input: &str) -> u64 {
+    let mut ranges: Vec<(u64, u64)> = Vec::new();
 
-//     let mut result: u64 = 0;
+    for line in input.lines() {
+        let line = line.trim();
 
-//     loop {
-//         let (count, new_grid) = number_of_forklift(&grid);
+        if line.is_empty() {
+            continue;
+        }
 
-//         if count == 0 {
-//             break;
-//         }
+        if let Some((start, end)) = line.split_once('-') {
+            ranges.push((start.parse().unwrap(), end.parse().unwrap()));
+        }
+    }
 
-//         result += count;
-//         grid = new_grid;
-//     }
+    let mut result = 0;
+    ranges = merge_range(ranges);
+    for &range in &ranges {
+        result += range.1 - range.0 + 1;
+    }
 
-//     result
-// }
+    result
+}
 
 #[cfg(test)]
 mod tests {
-    use super::part_a;
+    use super::{part_a, part_b};
 
-    const SAMPLE: &str = r#"
+    const SAMPLEA: &str = r#"
         3-5
         10-14
         16-20
@@ -106,11 +106,18 @@ mod tests {
 
     #[test]
     fn solves_part_a_sample() {
-        assert_eq!(part_a(SAMPLE), 3);
+        assert_eq!(part_a(SAMPLEA), 3);
     }
 
-    // #[test]
-    // fn solves_part_b_sample() {
-    //     assert_eq!(part_b(SAMPLE), 43);
-    // }
+    const SAMPLEB: &str = r#"
+        3-5
+        10-14
+        16-20
+        12-18
+    "#;
+
+    #[test]
+    fn solves_part_b_sample() {
+        assert_eq!(part_b(SAMPLEB), 14);
+    }
 }
