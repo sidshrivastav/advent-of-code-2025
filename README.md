@@ -30,6 +30,7 @@ cargo run -- 1a path/to/input.txt
 | 03  | ✅ | ✅ |
 | 04  | ✅ | ✅ |
 | 05  | ✅ | ✅ |
+| 06  | ✅ | ✅ |
 
 Solutions live in `src/days/dayXX.rs` and are registered in `src/days/mod.rs`.
 Add each day’s default input as `inputs/dayXX.txt`.
@@ -48,6 +49,14 @@ Run the Day 05 tests with:
 
 ```sh
 cargo test day05
+```
+
+Day 06 evaluates the worksheet problems by rows for Part A and by columns for Part B.
+
+Run the Day 06 tests with:
+
+```sh
+cargo test day06
 ```
 
 ## Development

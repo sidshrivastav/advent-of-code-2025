@@ -31,38 +31,80 @@ pub fn part_a(input: &str) -> u64 {
         }
     }
 
-    println!("{:?}", result);
-
     result
 }
 
-// pub fn part_b(input: &str) -> u64 {
-//     let mut ranges: Vec<(u64, u64)> = Vec::new();
+pub fn part_b(input: &str) -> u64 {
+    let data: Vec<&str> = input
+        .lines()
+        .filter(|line| !line.trim().is_empty())
+        .collect();
 
-//     for line in input.lines() {
-//         let line = line.trim();
+    if data.is_empty() {
+        return 0;
+    }
 
-//         if line.is_empty() {
-//             continue;
-//         }
+    let n = data.len();
+    let width = data.iter().map(|line| line.len()).max().unwrap();
 
-//         if let Some((start, end)) = line.split_once('-') {
-//             ranges.push((start.parse().unwrap(), end.parse().unwrap()));
-//         }
-//     }
+    let mut result: u64 = 0;
+    let mut numbers: Vec<u64> = Vec::new();
+    let mut operator = ' ';
 
-//     let mut result = 0;
-//     ranges = merge_range(ranges);
-//     for &range in &ranges {
-//         result += range.1 - range.0 + 1;
-//     }
+    for col in 0..width {
+        let mut builder = String::new();
 
-//     result
-// }
+        for row in 0..n - 1 {
+            let ch = data[row].as_bytes().get(col).copied().unwrap_or(b' ');
 
+            if ch != b' ' {
+                builder.push(ch as char);
+            }
+        }
+
+        let op = data[n - 1]
+            .as_bytes()
+            .get(col)
+            .copied()
+            .unwrap_or(b' ') as char;
+
+        if op == '+' || op == '*' {
+            operator = op;
+        }
+
+        if builder.is_empty() {
+            if !numbers.is_empty() {
+                let temp: u64 = if operator == '+' {
+                    numbers.iter().sum()
+                } else {
+                    numbers.iter().product()
+                };
+
+                result += temp;
+                numbers.clear();
+                operator = ' ';
+            }
+        } else {
+            numbers.push(builder.parse::<u64>().unwrap());
+        }
+    }
+
+    // Process the last problem
+    if !numbers.is_empty() {
+        let temp: u64 = if operator == '+' {
+            numbers.iter().sum()
+        } else {
+            numbers.iter().product()
+        };
+
+        result += temp;
+    }
+
+    result
+}
 #[cfg(test)]
 mod tests {
-    use super::{part_a};
+    use super::{part_a, part_b};
 
     const SAMPLE: &str = r#"
         123 328  51 64 
@@ -76,15 +118,8 @@ mod tests {
         assert_eq!(part_a(SAMPLE), 4_277_556);
     }
 
-    // const SAMPLEB: &str = r#"
-    //     3-5
-    //     10-14
-    //     16-20
-    //     12-18
-    // "#;
-
-    // #[test]
-    // fn solves_part_b_sample() {
-    //     assert_eq!(part_b(SAMPLEB), 14);
-    // }
+    #[test]
+    fn solves_part_b_sample() {
+        assert_eq!(part_b(SAMPLE), 3_263_827);
+    }
 }
